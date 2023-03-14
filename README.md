@@ -5,6 +5,10 @@ Repositório para armazemanento de código referente aos trabalhos e listas da d
 Aluno: Pedro Henrique Cardoso Paulo
 Professor: Ivan
 
+## Configuração
+
+OS: Ubuntu 20-04 (WSL2)
+
 ## Criando um ambiente
 
 Ter as versões corretas de pacotes é fundamental para garantir a repetibilidade dos exercícios. De modo a permitir isso, um arquivo .yml, contendo as informações dos pacotes utilizados nesses notebooks é encontrado na raiz desse repositório. Para instalá-lo, basta ter o Anaconda ou Miniconda instalado na máquina e rodar a seguinte linha de comando:
