@@ -1,0 +1,92 @@
+\documentclass[10pt, a4paper]{article}
+% \usepackage[english]{babel}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+
+% matlab code
+% \usepackage{matlab-prettifier}
+\usepackage[numbered,framed]{matlab-prettifier}
+\renewcommand{\lstlistingname}{Anexo} % Listing->Code
+\let\ph\mlplaceholder % shorter macro
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{myStyle}{
+    language=Matlab,
+    breaklines=true,
+    frame=single,
+    numbers=none,
+    basicstyle=\ttfamily\footnotesize,
+%     basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries\color{magenta},
+    commentstyle=\color{codegreen},
+    identifierstyle=\color{blue},
+    backgroundcolor=\color{backcolour},
+    stringstyle=\color{codepurple},
+}
+\usepackage{adjustbox}
+
+% For subfigure use
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=2cm]{geometry}
+
+% tabelas
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\usepackage{float}
+
+% Useful packages
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+%\graphicspath{{figures/}} %Setting the graphicspath
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+\begin{document}
+
+\begin{titlepage}
+      \begin{center}
+          \vspace*{1cm}
+
+          \Huge
+          \textbf{Lista 00}
+
+          \vspace{0.5cm}
+          \LARGE
+          MEC 2403 - Otimização e Algoritmos para Engenhria Mecânica
+
+          \vspace{1.5cm}
+
+          \textbf{Pedro Henrique Cardoso Paulo \\ {\tt pedrorjpaulo.phcp@gmail.com}}
+
+          \vfill
+          Professor: Ivan Menezes
+
+          \vspace{0.8cm}
+
+          \includegraphics[width=0.2\textwidth]{../general/puc.jpg}
+
+          \Large
+          Departamento de Engenharia Mecânica\\
+          PUC-RJ Pontifícia Universidade Católica do Rio de Janeiro\\
+          março, 2023
+
+      \end{center}
+  \end{titlepage}
+
+% \maketitle
+
+
+\bibliographystyle{apalike}
+\bibliography{export}
+
+\end{document}
