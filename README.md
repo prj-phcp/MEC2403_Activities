@@ -2,7 +2,7 @@
 
 Repositório para armazemanento de código referente aos trabalhos e listas da disciplina MEC2403 da pós-graduação da PUC-Rio
 
-Aluno: Pedro Henrique
+Aluno: Pedro Henrique Cardoso Paulo
 Professor: Ivan
 
 ## Criando um ambiente
