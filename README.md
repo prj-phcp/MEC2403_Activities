@@ -8,6 +8,7 @@ Professor: Ivan
 ## Configuração
 
 OS: Ubuntu 20-04 (WSL2)
+Python: 3.11 (Miniconda)
 
 ## Criando um ambiente
 
