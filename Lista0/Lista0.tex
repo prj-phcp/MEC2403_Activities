@@ -6,7 +6,8 @@
 
 % matlab code
 % \usepackage{matlab-prettifier}
-\usepackage[numbered,framed]{matlab-prettifier}
+%\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{pythonhighlight}
 \renewcommand{\lstlistingname}{Anexo} % Listing->Code
 \let\ph\mlplaceholder % shorter macro
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -49,6 +50,8 @@
 \usepackage{graphicx}
 %\graphicspath{{figures/}} %Setting the graphicspath
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{cleveref}
+\newcommand{\crefrangeconjunction}{--}
 
 
 \begin{document}
@@ -87,75 +90,94 @@
 
 \section[q01]{Questão 01}
 
-Para a questão 1 é solicitado calcular o gradiente e a metriz hessiana da função $f(x)$, dada por:
+\subsection[q01:enunciado]{Enunciado}
 
-\begin{equation}
-    f(x_1, x_2, x_3) = 3x_1^3x_2^2x_3 - 6x_1\log{x_2}x_3^4 + x_1^{-1}x_2^3 - x_1^2\sqrt{x_2}
+Calcular o gradiente e a matriz Hessiana da função $f(x_1, x_2, x_3)$, dada pela equação \cref{q01:en}
+
+\begin{equation}\label{q01:en}
+  f(x_1, x_2, x_3) = 3x_1^3x_2^2x_3 - 6x_1x_3^4\log{x_2} + x_1^{-1}x_2^3 - x_1^2\sqrt{x_2}
 \end{equation}
 
-As derivadas de primeira ordem dessa função são dadas por:
+onde $\log{x}$ reprersenta o logaritmo neperiano.
 
-\begin{equation}
-    \frac{\partial f}{\partial x_1} = 9x_1^2x_2^2x_3 - 6x_3^4\log{x_2} - x_1^{-2}x_2^3 - 2x_1\sqrt{x_2}
-\end{equation}
+\subsection[q01:solucao]{Solução}
 
-\begin{equation}
-    \frac{\partial f}{\partial x_2} = 6x_1^3x_2x_3 - 6x_1x_2^{-1}x_3^4 + 3x_1^{-1}x_2^2 - \frac{x_1^2}{2\sqrt{x_2}}
-\end{equation}
+A expressão para o gradiente ($\nabla f$) e para a Hessiana ($\mathbf{H}$) são apresentadas, respectivamente, nas equações \cref{q01:grad} e \cref{q01:hess}
 
-\begin{equation}
-    \frac{\partial f}{\partial x_3} = 3x_1^3x_2^2 - 24x_1x_3^3\log{x_2}
-\end{equation}
-
-Já as derivadas segundas são dadas por:
-
-\begin{equation}
-    \frac{\partial^2 f}{\partial x_1^2} = 18x_1x_2^2x_3 + 2x_1^{-3}x_2^3 - 2\sqrt{x_2}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial^2 f}{\partial x_2^2} = 6x_1^3x_3 + 6x_1x_2^{-2}x_3^4 + 6x_1^{-1}x_2 + \frac{x_1^2}{4x_2\sqrt{x_2}}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial^2 f}{\partial x_3^2} = - 72x_1x_3^2\log{x_2}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial^2 f}{\partial x_1x_2} = 18x_1^2x_2x_3 - 6x_2^{-1}x_3^4 - 3x_1^{-2}x_2^2 - \frac{x_1}{\sqrt{x_2}}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial^2 f}{\partial x_1x_3} = 9x_1^2x_2^2 - 24x_3^3\log{x_2}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial^2 f}{\partial x_2x_3} = 6x_1^3x_2 - 24x_1x_2^{-1}x_3^3
-\end{equation}
-
-A partir dessas derivadas, definimos o gradiente ($\nabla f$) e a Hessiana ($\mathbf{H}$) como:
-
-\[
+\begin{equation}\label{q01:grad} 
   \nabla f =
   \left[ {\begin{array}{c}
     \frac{\partial f}{\partial x_1} \\
     \frac{\partial f}{\partial x_2} \\
     \frac{\partial f}{\partial x_3} \\
   \end{array} } \right]
-  \]
+\end{equation}
 
-\[
+\begin{equation}\label{q01:hess} 
   \mathbf{H} =
   \left[ {\begin{array}{ccc}
     \frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1x_2} & \frac{\partial^2 f}{\partial x_1x_3} \\
     \frac{\partial^2 f}{\partial x_1x_2} & \frac{\partial^2 f}{\partial x_2^2} & \frac{\partial^2 f}{\partial x_2x_3} \\
     \frac{\partial^2 f}{\partial x_1x_3} & \frac{\partial^2 f}{\partial x_2x_3} & \frac{\partial^2 f}{\partial x_1^2} \\
   \end{array} } \right]
-\]
+\end{equation}
+
+Vale ressaltar que a formulação da Hessiana já faz uso do da igualdade matemática de derivadas segundas expressa na equação \cref{q01:teo}
+
+\begin{equation}\label{q01:teo}
+  \frac{\partial^2 f}{\partial x_i x_j} = \frac{\partial^2 f}{\partial x_j x_i}
+\end{equation}
+
+Dessa forma, o problema da determinação do gradiente e da hessiana se resume ao problema do cálculo das derivadas de primeira 
+e seunda ordem da função $f(x_1, x_2, x_3)$. Começando pelas derivadas de primeira ordem para determinação do gradiente, estas são 
+expressas pelas equações \cref{q01:dx1,q01:dx2,q01:dx3}
+
+\begin{equation}\label{q01:dx1}
+    \frac{\partial f}{\partial x_1} = 9x_1^2x_2^2x_3 - 6x_3^4\log{x_2} - x_1^{-2}x_2^3 - 2x_1\sqrt{x_2}
+\end{equation}
+
+\begin{equation}\label{q01:dx2}
+    \frac{\partial f}{\partial x_2} = 6x_1^3x_2x_3 - 6x_1x_2^{-1}x_3^4 + 3x_1^{-1}x_2^2 - \frac{x_1^2}{2\sqrt{x_2}}
+\end{equation}
+
+\begin{equation}\label{q01:dx3}
+    \frac{\partial f}{\partial x_3} = 3x_1^3x_2^2 - 24x_1x_3^3\log{x_2}
+\end{equation}
+
+Já as derivadas segundas, necessárias para a determinação da Hessiana, são dadas pelas equações 
+\cref{q01:dx1x1,q01:dx2x2,q01:dx3x3,q01:dx1x2,q01:dx1x3,q01:dx2x3}
+
+\begin{equation}\label{q01:dx1x1}
+    \frac{\partial^2 f}{\partial x_1^2} = 18x_1x_2^2x_3 + 2x_1^{-3}x_2^3 - 2\sqrt{x_2}
+\end{equation}
+
+\begin{equation}\label{q01:dx2x2}
+    \frac{\partial^2 f}{\partial x_2^2} = 6x_1^3x_3 + 6x_1x_2^{-2}x_3^4 + 6x_1^{-1}x_2 + \frac{x_1^2}{4x_2\sqrt{x_2}}
+\end{equation}
+
+\begin{equation}\label{q01:dx3x3}
+    \frac{\partial^2 f}{\partial x_3^2} = - 72x_1x_3^2\log{x_2}
+\end{equation}
+
+\begin{equation}\label{q01:dx1x2}
+    \frac{\partial^2 f}{\partial x_1x_2} = 18x_1^2x_2x_3 - 6x_2^{-1}x_3^4 - 3x_1^{-2}x_2^2 - \frac{x_1}{\sqrt{x_2}}
+\end{equation}
+
+\begin{equation}\label{q01:dx1x3}
+    \frac{\partial^2 f}{\partial x_1x_3} = 9x_1^2x_2^2 - 24x_3^3\log{x_2}
+\end{equation}
+
+\begin{equation}\label{q01:dx2x3}
+    \frac{\partial^2 f}{\partial x_2x_3} = 6x_1^3x_2 - 24x_1x_2^{-1}x_3^3
+\end{equation}
+
+
 
 \section[q02]{Questão 02}
 
-O enunciado solicita classificar a metriz abaixo segundo sua positividade:
+\subsection[q02:enunciado]{Enunciado}
+
+Classificar a matriz abaixo quanto à sua positividade:
 
 \[
   \mathbf{A} =
@@ -166,8 +188,10 @@ O enunciado solicita classificar a metriz abaixo segundo sua positividade:
   \end{array} } \right]
 \]
 
+\subsection[q02:solucao]{Solução}
+
 A determinação da positividade da matriz será feita por meio de seus autodeterminantes. 
-Caso os 3 autodeterminantes da matriz sejam positivos, sabe-se que ela será positiva definida. 
+Caso os 3 autodeterminantes da matriz sejam positivos, sabe-se que ela será positiva definida (ou semi-definida caso algum seja zero). 
 Caso eles alternem entre valores positivos e negativos, sabe-se que ela será negativa definida. Caso contrário,
 nada pode-se afirmar. Calculando o primeiro:
 
@@ -196,28 +220,98 @@ Calculando o terceiro:
   \end{array} } \right| = -3
 \]
 
-Como nenhum dos padrões descritos foi respeitado, a matriz não é nem positiva definida e nem negativa definida, 
+Como nenhum dos padrões descritos foi respeitado, a matriz não é nem 
+positiva definida e nem negativa definida, 
 ou seja, a matriz apresenta autovalores positivos e negativos.
 
-\section[q03]{Questão 03}
+\section[q03]{Questão 03}\label{q03}
+
+\subsection[q03:enunciado]{Enunciado}
+
+Determinar a expansão em série de Taylor, em torno do ponto $x = 1$, 
+da função $f(x) = e^{2x}$. Em seguida, usando o MATLAB ou Python, 
+plotar os gráficos da função $f$ e de suas respectivas aproximações
+(polinômios) de ordens 0, 1, 2 e 3.
+
+\subsection[q03:solucao]{Solução}
+
+Para a função em questão, suas derivadas são calculadas de acordo com a regra de 
+derivação da função exponencial. Assim temos que a derivada n-ésima da função 
+$f(x)$ criada é dada pela equação \cref{q03:deriv}
+
+\begin{equation}\label{q03:deriv}
+    \frac{d^nf}{dx^n} = 2^n e^{2x}
+\end{equation}
+
+Pela definição da série de Taylor, para uma expansão ao redor de $x = 1$, temos 
+que a expansão da função seria a dada pela equação \cref{q03:taylor}
+
+\begin{equation}\label{q03:taylor}
+    f(x) \cong \sum^{\infty}_{n=0} 2^n e^2 (x-1)^n
+\end{equation}
+
+O primeiro passo é implementar em Python as funções {\tt f} e {\tt taylor\_f} que 
+representam, respectivamente, a função f definida na questão e seu polinômio 
+de Taylor de ordem arbitrária.
+
+\begin{python}
+def f(x):
+
+return np.exp(2*x)
+
+def taylor_f(x, order):
+
+f_approx = 0
+for n in range(order+1):
+    f_approx += (x-1)**n * (2**n) * np.exp(2)
+return f_approx
+\end{python}
+
+As funçoes são implementadas com funções do módulo 
+{\tt numpy} de modo a garantir a vetorização. Uma vez tendo as funções implementadas,
+podemos plotar gráficos das aproximações desejadas parta vizinhanças dos ponto $x = 1$
+usando o seguinte código:
+
+\begin{python}
+orders = [0, 1, 2, 3] # Ordens da aproximacao
+points = 50 # Pontos de x considerados
+x_min = 0 # Minimo x
+x_max = 2 # Maximo x
+x_values = np.linspace(x_min, x_max, points)
+fig, ax = plt.subplots(1,1, figsize=(5, 5))
+f_real = f(x_values)
+ax.plot(x_values, f_real, 'm--', label='$f(x) = e^{2x}$')
+for n in orders:
+    f_approx = taylor_f(x_values, n)
+    ax.plot(x_values, f_approx, label=f'ordem = {n}')
+
+ax.plot(1, f(1), 'ko')
+ax.legend()
+ax.grid()
+\end{python}
+
+A \cref{fig:q3} apresenta alguns plots com diferentes intervalos de $x$ para a análise
+da aporximação dos polinômios de Taylor. É possível ver que, para ordens maiores, a aproximação
+tente a ficar melhor na vizinhança do ponto expandido, mas isso não necessariamente é verdade 
+conforme nos afastamos dele.
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/q3_1.pdf}
         \caption{$x \in [0, 2]$}
         \label{fig:q3_1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/q3_2.pdf}
         \caption{$x \in [0.25, 1.25]$}
         \label{fig:q3_2}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.32\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/q3_3.pdf}
         \caption{$x \in [0.9, 1.1]$}
@@ -228,6 +322,89 @@ ou seja, a matriz apresenta autovalores positivos e negativos.
 \end{figure}
 
 \section[q04]{Questão 04}
+
+\subsection[q04:enunciado]{Enunciado}
+
+Seja a função $f(x_1, x_2)$ dada pela equação \cref{q04:func}
+
+\begin{equation}\label{q04:func}
+    f(x_1, x_2) = x_1^3 + 2x_1 x_2^2 - x_2^3 - 20x_1
+\end{equation}
+
+Desenhar o gráfico da curva contida em um plano Cartesiano, 
+cujo eixo das abscissas corresponde à reta que passa pelos pontos 
+$P_1 = (-0.7, 1.6)$ e $P_2 = (3.7,-0.4)$, a origem desse eixo é no 
+ponto $P_1$ e o eixo das ordenadas corresponde aos valores da função $f$. 
+Utilizar o MATLAB ou Python e considerar apenas o trecho entre os pontos 
+$P_1$ e $P_2$.
+
+\subsection[q04:solucao]{Solução}
+
+De forma similar ao feito na Questão 03 (seção \ref{q03}), nossa solução começa por meio da
+implementação da função Python que representa a equação que desejamos estudar. Essa função receberá
+um vetor 1D que tem as coordenadas do ponto no plano $xy$.
+
+\begin{python}
+def f2(P):
+    return P[0]**3 + 2*P[0]*(P[1]**2) - P[1]**3 - 20*P[0]
+\end{python}
+
+A determinação da equação da reta que passa pelos pontos $P_1$ e $P_2$, por sua vez, será feita
+vetorialmente por meio da equação paramétrica \cref{q04:reta}
+
+\begin{equation}\label{q04:reta}
+  \mathbf{P} = \mathbf{P_1} + \alpha\mathbf{\hat{v}}, \quad \alpha \in \left[0, ||\mathbf{v}||\right]
+\end{equation}
+
+onde o vetor $\mathbf{v} = \mathbf{P_2} - \mathbf{P_1}$. É importante notar que, 
+no espaço 3D, essa reta determina, na verdade, um plano paralelo ao eixo vertical,
+de modo que o objetivo da questão é determinar a interseção entre esse plano e a superfície
+definida na equação \cref{q04:func}. Em Python, o plot dessa interseção pode ser feito
+por meio do seguinte código:
+\begin{python}
+P1 = np.array([-0.7, 1.6])
+P2 = np.array([3.7, -0.4])
+v = P2 - P1
+v_norm = np.linalg.norm(v)
+v_hat  = v / v_norm
+
+points = 50
+x_values = np.linspace(0, v_norm, points)
+y_values = f2(P1.reshape(-1,1) + v_hat.reshape(-1,1)*x_values.reshape(1,-1))
+fig, ax = plt.subplots(1,1, figsize=(5, 5))
+ax.plot(x_values, y_values, 'm--', label='Funcao projetada')
+ax.hlines(0, 0, v_norm, 'k', linewidth=1.0)
+ax.set_xlim(0, v_norm)
+ax.plot(0, 0, 'ko')
+ax.text(0.05, -2.5, '$P_1$')
+ax.plot(v_norm, 0, 'ko')
+ax.text(4.6, -2.5, '$P_2$')
+ax.legend()
+ax.grid()
+\end{python}
+
+A visualização 2D dessa interseção, junto com uma representação 3D do problema é apresentada na \cref{fig:q4}.
+
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/q4_1.pdf}
+        \caption{Visão 2D}
+        \label{fig:q4_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/q4_2.pdf}
+        \caption{Visão 3D}
+        \label{fig:q4_2}
+    \end{subfigure}
+    \hfill
+       \caption{Plot da projeção da função no plano da reta}
+       \label{fig:q4}
+\end{figure}
 
 \bibliographystyle{apalike}
 \bibliography{export}
