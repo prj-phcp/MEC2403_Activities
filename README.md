@@ -3,6 +3,7 @@
 Repositório para armazemanento de código referente aos trabalhos e listas da disciplina MEC2403 da pós-graduação da PUC-Rio
 
 Aluno: Pedro Henrique Cardoso Paulo
+
 Professor: Ivan Menezes
 
 ## Configuração
@@ -26,7 +27,7 @@ Recomendo também a instalação do <a href="https://code.visualstudio.com/Downl
 
 ### Clonando o repositório
 
-Tendo o git instalado, o conteúdo do repositório pode ser baixado para a sua máquina via o seguinte comando:
+Tendo o git instalado, o conteúdo do repositório pode ser baixado para a sua máquina via o seguinte comando
 
 ```(bash)
 git clone https://github.com/prj-phcp/MEC2403_Activities.git
