@@ -217,6 +217,7 @@ stp = steps.ConstantStep(da = 0.01)
 ak, p_final = stp(p_inicial, d, f)
 \end{python}
 
+\newpage
 \section{Questão 02}
 
 \subsection{Enunciado}
@@ -257,6 +258,7 @@ cada gráfico deverá conter, pelo menos:
 Um exemplo simples do código que foi usado para gerar os gráficos apresentados neste relatório é apresentado abaixo. 
 Em seguida, são apresentadas as seções que mostram os resultados obtidos e alguns comentários a respeito destes.
 
+
 \begin{python}
 step_list   = [steps.ConstantStep(da = 0.01), steps.BissectionStep(da = 0.01, tol = 1e-5), steps.GoldenSectionStep(da = 0.01, tol = 1e-5)]
 
@@ -269,10 +271,6 @@ Z = f(X, Y)
 i = 0
 for step in step_list:
     i += 1
-    t_init = datetime.datetime.now()
-    ak, p_final = step(p_inicial, d, f)
-    t_final = datetime.datetime.now()
-    print(f'Final do passo {i}: ak = {ak}, p_final = [{p_final[0]}, {p_final[1]}].T. Execucao:{t_final - t_init}')
     fig, ax = plt.subplots(1,1, figsize=(5, 5))
     ax.contour(X, Y, Z, cmap='rainbow')
     ax.plot(*p_inicial, 'ro')
@@ -286,12 +284,14 @@ for step in step_list:
     ax.set_xlabel('$x_1$')
     ax.set_ylabel('$x_2$')
     ax.set_title(f'$\\alpha_k = {ak:.5f}$, $\mathbf{{P_{{final}}}} = [{p_final[0]:.2f}, {p_final[1]:.2f}]^T$')
-    fig.savefig(f'images/q2{item}_{i}.pdf')
 \end{python}
-
 \subsubsection{Resultados para a função (\ref{func:a})}
 
-\lipsum[1]
+Os resultados para a análise da função (\ref{func:a}) são apresentados na Figura \ref{fig:q2a}. Analisando os resultados
+é possível ver que os três méetodos retornaram resultados bem similares, com os étodos da Bisseção e Seção áurea retornando
+uma estimativa ligeiramente mais refinada para o mínimo, com mínimas diferenças no $\alpha_k$ estimado. É interessante notar que,
+para este exemplo, o ponto estimado parece ser aproximadamente o ponto em que a direção em que tentamos calcular o mínimo
+tangencia uma curva de nível, o que convergeria para um ponto em que esperaríamos ter o primeiro mínimo local da função nessa direção.
 
 % Figura da funcao a
 \begin{figure}
@@ -313,7 +313,7 @@ for step in step_list:
   \begin{subfigure}[b]{0.32\textwidth}
       \centering
       \includegraphics[width=\textwidth]{images/q2a_3.pdf}
-      \caption{Razão áurea}
+      \caption{Seção áurea}
       \label{fig:q2a_3}
   \end{subfigure}
   \caption{Resultados para a função (\ref{func:a}) caso com diferentes métodos}
@@ -322,7 +322,10 @@ for step in step_list:
 
 \subsubsection{Resultados para a função (\ref{func:b})}
 
-\lipsum[1]
+Os resultados para a análise da função (\ref{func:b}) são apresentados na Figura \ref{fig:q2b}. Novamente, não há 
+diferenças aapreciáveis entre os resultados dos métodos. Isso provavelmente se deve ao fato de o $\Delta\alpha$ especificado para
+o passo constante (e usado de base para delinear o intervalo dos demais métodos) já ser refinado o suficiente para 
+obtermos uma resposta adequada sem a necessidade de uma posterior Bisseção ou Seção Áurea.
 
 % Figura da funcao b
 \begin{figure}
@@ -344,7 +347,7 @@ for step in step_list:
   \begin{subfigure}[b]{0.32\textwidth}
       \centering
       \includegraphics[width=\textwidth]{images/q2b_3.pdf}
-      \caption{Razão áurea}
+      \caption{Seção áurea}
       \label{fig:q2b_3}
   \end{subfigure}
      \caption{Resultados para a função (\ref{func:b}) com diferentes métodos}
@@ -353,7 +356,11 @@ for step in step_list:
 
 \subsubsection{Resultados para a função (\ref{func:c})}
 
-\lipsum[1]
+Os resultados para a análise da função (\ref{func:c}) são apresentados na Figura \ref{fig:q2c}. Diferentemente dos casos anteriores, aqui vemos
+que os três métodos convergiram pra pontos iguais ou muito próximos do ponto inicial, ou seja, nosso ponto inicial já é o 
+mínimo esperado. Isso é algo que faz sentido ao notarmos que a direção em que buscamos o nosso mínimo tem sentido apontando
+para curvas de nível de maior valor, ou seja, a direçõ de busca necessariamente leva a valorres maiores da função na proximidade
+do ponto inicial.
 
 % Figura da funcao c
 \begin{figure}
@@ -375,12 +382,18 @@ for step in step_list:
   \begin{subfigure}[b]{0.32\textwidth}
       \centering
       \includegraphics[width=\textwidth]{images/q2c_3.pdf}
-      \caption{Razão áurea}
+      \caption{Seção áurea}
       \label{fig:q2c_3}
   \end{subfigure}
      \caption{Resultados para a função (\ref{func:c}) com diferentes métodos}
      \label{fig:q2c}
 \end{figure}
+
+É importante ressaltar que isso não é um problema do método numérico por si, mas um problema dos inputs forencidos para
+a estimativa do mínimo. De forma a provar esse argumento, a Figura \ref{fig:q2c2} mostra o resultado que seria obtido 
+fazendo-se a bisca na mesma direção mas com vetor de sentido contrário ($\mathbf{d} = [-3, -1.5]^T$). Nota-se que nesse caso o 
+método seguiu até um ponto de mínimo inferior ao ponto inicial, evidenciando o argumento de que, além de termos algoritmos capazes de 
+estimar corretamente o $\alpha_k$, é igualmente importante ermos capazes de estimar adequadamente a direção de busca.
 
 % Figura da funcao c - reversa
 \begin{figure}
@@ -402,7 +415,7 @@ for step in step_list:
   \begin{subfigure}[b]{0.32\textwidth}
       \centering
       \includegraphics[width=\textwidth]{images/q2c2_3.pdf}
-      \caption{Razão áurea}
+      \caption{Seção áurea}
       \label{fig:q2c2_3}
   \end{subfigure}
      \caption{Resultados para a função (\ref{func:c}) com diferentes métodos (revertendo a direção)}
