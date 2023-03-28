@@ -323,7 +323,7 @@ tangencia uma curva de nível, o que convergeria para um ponto em que esperaría
 \subsubsection{Resultados para a função (\ref{func:b})}
 
 Os resultados para a análise da função (\ref{func:b}) são apresentados na Figura \ref{fig:q2b}. Novamente, não há 
-diferenças aapreciáveis entre os resultados dos métodos. Isso provavelmente se deve ao fato de o $\Delta\alpha$ especificado para
+diferenças apreciáveis entre os resultados dos métodos. Isso provavelmente se deve ao fato de o $\Delta\alpha$ especificado para
 o passo constante (e usado de base para delinear o intervalo dos demais métodos) já ser refinado o suficiente para 
 obtermos uma resposta adequada sem a necessidade de uma posterior Bisseção ou Seção Áurea.
 
@@ -359,7 +359,7 @@ obtermos uma resposta adequada sem a necessidade de uma posterior Bisseção ou 
 Os resultados para a análise da função (\ref{func:c}) são apresentados na Figura \ref{fig:q2c}. Diferentemente dos casos anteriores, aqui vemos
 que os três métodos convergiram pra pontos iguais ou muito próximos do ponto inicial, ou seja, nosso ponto inicial já é o 
 mínimo esperado. Isso é algo que faz sentido ao notarmos que a direção em que buscamos o nosso mínimo tem sentido apontando
-para curvas de nível de maior valor, ou seja, a direçõ de busca necessariamente leva a valorres maiores da função na proximidade
+para curvas de nível de maior valor, ou seja, sem uma proteção para esse caso, a busca necessariamente leva a valores maiores da função na proximidade
 do ponto inicial.
 
 % Figura da funcao c
@@ -389,11 +389,11 @@ do ponto inicial.
      \label{fig:q2c}
 \end{figure}
 
-É importante ressaltar que isso não é um problema do método numérico por si, mas um problema dos inputs forencidos para
-a estimativa do mínimo. De forma a provar esse argumento, a Figura \ref{fig:q2c2} mostra o resultado que seria obtido 
-fazendo-se a bisca na mesma direção mas com vetor de sentido contrário ($\mathbf{d} = [-3, -1.5]^T$). Nota-se que nesse caso o 
+Para acharmos o mínimo para a direção dada, seria necessário efetuarmos a busca no sentido contrário ao do vetor direção fornecido, 
+o que é análogo a procurarmos valores negativos de $\alpha$. A Figura \ref{fig:q2c2} mostra o resultado que seria obtido 
+fazendo-se a busca na mesma direção mas com vetor de sentido contrário. Nota-se que nesse caso o 
 método seguiu até um ponto de mínimo inferior ao ponto inicial, evidenciando o argumento de que, além de termos algoritmos capazes de 
-estimar corretamente o $\alpha_k$, é igualmente importante sermos capazes de estimar adequadamente a direção de busca.
+estimar corretamente o $\alpha_k$, é igualmente importante sermos capazes de estimar adequadamente o sentido a percorrer na direção de busca.
 
 % Figura da funcao c - reversa
 \begin{figure}[htpb]
@@ -427,7 +427,7 @@ da implementação de uma checagem de derivada numérica idêntica a feita no m�
 selecionar a metade a manter no início do método do passo constante. Essa checagem, por sua vez, definiu
 um multiplicador a ser aplicado em $\mathbf{d}$ durante o processo e reportado em $\alpha$ como 
 seu sinal. Para fins de exemplo, um valor booleano adicional foi posto na declaração da função passo
-para desligar essa checagem, de modo a permitir testes em que seguiríamos cegamente a direção dada,
+para desligar essa checagem, de modo a permitir testes em que seguiríamos cegamente a o sentido da direção dada,
 como o que gerou a Figura \ref{fig:q2c}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
