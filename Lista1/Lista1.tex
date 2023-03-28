@@ -422,6 +422,14 @@ estimar corretamente o $\alpha_k$, é igualmente importante sermos capazes de es
      \label{fig:q2c2}
 \end{figure}
 
+De modo a robustecer a implementação para usos futuros, a Figura \ref{fig:q2c2} foi gerada por meio
+da implementação de uma checagem de derivada numérica idêntica a feita no método da Bisseção para 
+selecionar a metade a manter no início do método do passo constante. Essa checagem, por sua vez, definiu
+um multiplicador a ser aplicado em $\mathbf{d}$ durante o processo e reportado em $\alpha$ como 
+seu sinal. Para fins de exemplo, um valor booleano adicional foi posto na declaração da função passo
+para desligar essa checagem, de modo a permitir testes em que seguiríamos cegamente a direção dada,
+como o que gerou a Figura \ref{fig:q2c}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{apalike}

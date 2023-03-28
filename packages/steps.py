@@ -2,14 +2,16 @@ import numpy as np
 
 class ConstantStep:
     
-    def __init__(self, da):
+    def __init__(self, da, epsilon=1e-8, check_direction=True):
 
         self.da = da
+        self.epsilon = epsilon
+        self.check_dir = check_direction
         self.aL = None
         self.aU = None
         self.fL = None
         self.fU = None
-
+        self.multiplier = 1.0
         self.reset_step()
 
     def reset_step(self):
@@ -18,43 +20,46 @@ class ConstantStep:
         self.aU = self.da
         self.fL =  0.0
         self.fU = -1.0
+        self.multiplier = 1.0
+        
+    def calculate_deriv(self, p_initial, direction, function, aM):
+
+        f_plus = function(*(p_initial + self.multiplier*(aM + self.epsilon)*direction))
+        f_minus = function(*(p_initial + self.multiplier*(aM - self.epsilon)*direction))
+        
+        return f_plus - f_minus
 
     def calculate_bounds(self, p_initial, direction, function):
 
-        self.fL = function(*(p_initial + self.aL*direction))
-        self.fU = function(*(p_initial + self.aU*direction))
+        self.fL = function(*(p_initial + self.multiplier*self.aL*direction))
+        self.fU = function(*(p_initial + self.multiplier*self.aU*direction))
 
     def __call__(self, p_initial, direction, function):
         
         self.reset_step()
+        if self.calculate_deriv(p_initial, direction, function, 0) > 0 and self.check_dir:
+            self.multiplier = -1.0
         self.calculate_bounds(p_initial, direction, function)
         while self.fL > self.fU:
             self.aL = self.aU
             self.aU += self.da
             self.calculate_bounds(p_initial, direction, function)
-        pend = p_initial + self.aL*direction
-        return self.aL, pend
+        pend = p_initial + self.multiplier*self.aL*direction
+        
+        return self.multiplier*self.aL, pend
     
 
 class BissectionStep(ConstantStep):
 
-    def __init__(self, da, tol, epsilon=1e-8):
+    def __init__(self, da, tol, epsilon=1e-8, check_direction=True):
 
-        self.epsilon = epsilon
         if tol <= epsilon:
             self.tol = epsilon
         else:
             self.tol = tol
 
-        super().__init__(da=da)
+        super().__init__(da=da, epsilon=epsilon, check_direction=check_direction)
         
-
-    def calculate_deriv(self, p_initial, direction, function, aM):
-
-        f_plus = function(*(p_initial + (aM + self.epsilon)*direction))
-        f_minus = function(*(p_initial + (aM - self.epsilon)*direction))
-
-        return f_plus - f_minus
 
     def __call__(self, p_initial, direction, function):
 
@@ -70,18 +75,18 @@ class BissectionStep(ConstantStep):
                 self.aL = aM
 
         ak = 0.5 * (self.aU + self.aL)
-        pend = p_initial + ak*direction
+        pend = p_initial + self.multiplier*ak*direction
 
-        return ak, pend
+        return self.multiplier*ak, pend
     
 class GoldenSectionStep(ConstantStep):
 
-    def __init__(self, da, tol):
+    def __init__(self, da, tol, epsilon=1e-8, check_direction=True):
 
         self.tol = tol
         self.ratio = 0.5*(np.sqrt(5) - 1.0)
 
-        super().__init__(da=da)
+        super().__init__(da=da, epsilon=epsilon, check_direction=check_direction)
 
         self.aE = None
         self.aD = None
@@ -93,12 +98,12 @@ class GoldenSectionStep(ConstantStep):
     def calculate_D(self, p_initial, direction, function):
 
         self.aD = self.aL + self.ratio*self.beta
-        self.fD = function(*(p_initial + self.aD*direction))
+        self.fD = function(*(p_initial + self.multiplier*self.aD*direction))
 
     def calculate_E(self, p_initial, direction, function):
 
         self.aE = self.aL + (1-self.ratio)*self.beta
-        self.fE = function(*(p_initial + self.aE*direction))
+        self.fE = function(*(p_initial + self.multiplier*self.aE*direction))
 
     def __call__(self, p_initial, direction, function):
 
@@ -126,8 +131,8 @@ class GoldenSectionStep(ConstantStep):
                 self.calculate_D(p_initial, direction, function)
 
         ak = 0.5 * (self.aU + self.aL)
-        pend = p_initial + ak*direction
+        pend = p_initial + self.multiplier*ak*direction
 
-        return ak, pend
+        return self.multiplier*ak, pend
 
 
