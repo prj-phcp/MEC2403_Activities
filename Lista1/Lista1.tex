@@ -188,6 +188,7 @@ def f(x1, x2):
 # Ponto inicial e direcao
 p_inicial = np.array([-2, 3])
 d = np.array([1.453, -4.547])
+d = d/np.linalg.norm(d) #normalizacao do vetor
 
 # Instanciando o passo
 stp = steps.ConstantStep(da = 0.01)
@@ -223,7 +224,7 @@ Adotar tolerância de $10^{-5}$ para verificação da convergência numérica.
 \subsection{Solução}
 
 Para executar esse exercício, serão usadas as classes já descritas na Questão 01 (seção \ref{sec:q01}). A biblioteca {\tt matplotlib} do Python será 
-novamente usada para gerar os gráficos necessários. Para facilitar a vaisualização, será gerado um gráfico para cada método de cálculo do passo, sendo que 
+novamente usada para gerar os gráficos necessários. Para facilitar a visualização, será gerado um gráfico para cada método de cálculo do passo, sendo que 
 cada gráfico deverá conter, pelo menos:
 
 \begin{itemize}
@@ -234,9 +235,9 @@ cada gráfico deverá conter, pelo menos:
   \item O tamanho do passo $\alpha_k$ e coordenadas do ponto final (incluindo $z = f(x_1, x_2)$) no título do gráfico
 \end{itemize}
 
-Um exemplo simples do código que foi usado para gerar os gráficos apresentados neste relatório é apresentado abaixo. 
-Em seguida, são apresentadas as seções que mostram os resultados obtidos e alguns comentários a respeito destes.
-
+Um exemplo simples do código que foi usado para gerar os gráficos neste relatório é apresentado abaixo. 
+Em seguida, são apresentadas as seções que mostram os resultados obtidos e alguns comentários a respeito destes. Por fim, será apresentado um resumo dos 
+resultados obtidos com casas decimais superiores à tolerância imposta para fins de comparação.
 
 \begin{python}
 step_list   = [steps.ConstantStep(da = 0.01), steps.BissectionStep(da = 0.01, tol = 1e-5), steps.GoldenSectionStep(da = 0.01, tol = 1e-5)]
@@ -264,6 +265,10 @@ for step in step_list:
     ax.set_ylabel('$x_2$')
     ax.set_title(f'$\\alpha_k = {ak:.5f}$, $\mathbf{{P_{{final}}}} = [{p_final[0]:.2f}, {p_final[1]:.2f}]^T$')
 \end{python}
+
+Ressalta-se que a classe de passo criada não é responsável por normalizar o vetor de direção, de modo que seu módulo pode impactar o resultado e o tamanho 
+final do passo. Para padronizarmos isso, ao longo deste exercício, será sempre executada a normalização do vetor fornecido de direção $\mathbf{d}$ do enunciado, 
+ou seja, o $\alpha_k$ calculado será um multiplicador a ser aplicado em $\mathbf{\hat{d}}$.
 \subsubsection{Resultados para a função (\ref{func:a})}
 
 Os resultados para a análise da função (\ref{func:a}) são apresentados na Figura \ref{fig:q2a}. Analisando os resultados
@@ -408,6 +413,82 @@ um multiplicador a ser aplicado em $\mathbf{d}$ durante o processo e reportado e
 seu sinal. Para fins de exemplo, um valor booleano adicional foi posto na declaração da função passo
 para desligar essa checagem, de modo a permitir testes em que seguiríamos cegamente a o sentido da direção dada,
 como o que gerou a Figura \ref{fig:q2c}.
+
+\subsubsection{Resumo dos resultados}
+
+O resumo dos resultados obtidos para os pontos de mínimo (com terceira componente $x_3 = f(x_1, x_2)$) e $\alpha_k$ do método de minimização
+univariável são apresentados nesta seção. Como a tolerância para os métodos da Bisseção e Seção aúrea adotada foi de $10^{-5}$, os resultados
+foram compilados com 6 casas decimais. De forma geral, fica claro que os métodos da Bisseção e Seção áurea retornam valores melhores do que o passo
+constante apenas, o que é esperado. Além disso, tal como esperado, a diferença entre o $\alpha_k$ retornado por esses métodos e o passo constante 
+não supera o tamanho do passo (no caso, $0.01$), o que é adequado uma vez que a busca por seções ocorre no intervalo delimitado pelo passo constante. 
+Também notamos que a ordem de grandeza da diferença entre o $\alpha_k$ da Bisseção e a Seção áurea é igual ou inferior à tolerância imposta, o que 
+também condiz com o esperado.
+
+\begin{enumerate}[(a)]
+    \item Primeiro Exemplo:
+    \begin{itemize}
+    \item Passo constante ($\alpha_k = 2.130000$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         0.047435\\ 0.094870\\ -0.022684
+        \end{array} } \right]
+        \] 
+    \item Bisseção ($\alpha_k = 2.134429$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         0.045454\\ 0.090909\\ -0.022727
+        \end{array} } \right]
+        \] 
+    \item Seção áurea ($\alpha_k = 2.134428$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         0.045455\\ 0.090910\\ -0.022727
+        \end{array} } \right]
+        \]
+    \end{itemize}
+    \item Função de McCormick:
+    \begin{itemize}
+    \item Passo constante ($\alpha_k = 4.770000$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         -0.548069\\ -1.543655\\ -2.913200
+        \end{array} } \right]
+        \] 
+    \item Bisseção ($\alpha_k = 4.773579$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         -0.546980\\ -1.547064\\ -2.913223
+        \end{array} } \right]
+        \] 
+    \item Seção áurea ($\alpha_k = 4.773577$): \\
+       \[
+            P_{min} = \left[ {\begin{array}{c}
+                         -0.546980\\ -1.547061\\ -2.913223
+        \end{array} } \right]
+        \] 
+    \end{itemize}
+    \item Função de Himmelblau: 
+    \begin{itemize}
+    \item Passo constante ($\alpha_k = -3.390000$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         -3.032108\\ 3.483946\\ 7.248700
+        \end{array} } \right]
+        \] 
+    \item Bisseção ($\alpha_k = -3.392163$): \\
+        \[
+            P_{min} = \left[ {\begin{array}{c}
+                         -3.034043\\ 3.482979\\ 7.248492
+        \end{array} } \right]
+        \] 
+    \item Seção áurea ($\alpha_k = -3.392163$): \\
+       \[
+            P_{min} = \left[ {\begin{array}{c}
+                         -3.034043\\ 3.482979\\ 7.248492
+        \end{array} } \right]
+        \]
+    \end{itemize} 
+  \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
