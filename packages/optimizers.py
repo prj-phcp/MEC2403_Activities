@@ -63,12 +63,17 @@ class UnivariantOptimizer(GenericOptimizer):
         return self.dirvectors[self.iter % self.dims]
     
 
-class PowellOptimizer(UnivariantOptimizer):
+class PowellOptimizer(GenericOptimizer):
 
     def __init__(self, tol, max_iter=200):
 
+        self.dirvectors = None
         super().__init__(tol, max_iter)
 
+    def start_otim(self, x=None):
+
+        super().start_otim(x)
+        self.dirvectors = np.eye(self.dims)
 
     def get_direction(self, x, function):
         
@@ -86,12 +91,16 @@ class PowellOptimizer(UnivariantOptimizer):
 
 class SteepestDescentOptimizer(GenericOptimizer):
 
+    def __init__(self, tol, max_iter=200):
+
+        super().__init__(tol, max_iter)
+
     def get_direction(self, x, function):
 
         return -1*self.cache_grad[-1]
     
 
-class FletcherReevesOptimizer(SteepestDescentOptimizer):
+class FletcherReevesOptimizer(GenericOptimizer):
 
     def __init__(self, tol, max_iter=200):
 
@@ -114,12 +123,57 @@ class FletcherReevesOptimizer(SteepestDescentOptimizer):
 
 class NewtonRaphsonOptimizer(GenericOptimizer):
 
+    def __init__(self, tol, max_iter=200):
+
+        super().__init__(tol, max_iter)
+
     def get_direction(self, x, function):
         
         return - np.linalg.solve(function.Hessian(*x), self.cache_grad[-1])
 
 
-class LBFGOptimizer(GenericOptimizer):
+class BFGSOptimizer(GenericOptimizer):
 
-    pass
+    def __init__(self, tol, max_iter=200):
+
+        self.S_matrix = None
+        super().__init__(tol, max_iter)
+
+    def clear_cache(self):
+
+        self.cache_d = None
+        super().clear_cache()
+
+    def start_otim(self, x=None):
+
+        super().start_otim(x)
+        self.S_matrix = np.eye(self.dims)
+
+    def update_S_matrix(self):
+
+        if self.iter > 0:
+            delta_x = self.cache_x[-1] - self.cache_x[-2]
+            delta_grad = self.cache_grad[-1] - self.cache_grad[-2]
+
+            # PAra deixar generico, ak foi calculado pelo produto escalar
+            a_k = np.dot(self.cache_d, delta_x) / np.linalg.norm(self.cache_d)
+
+            v_k = self.cache_grad[-2] * (1.0 + a_k * np.sqrt(
+                np.abs(np.dot(self.cache_d, delta_grad) / np.dot(self.cache_grad[-2], delta_x)))) - self.cache_grad[-1]
+            
+            w_k = delta_x * (np.dot(delta_x, delta_grad))
+
+            v_k, w_k = v_k.reshape(-1,1), w_k.reshape(-1,1)
+            matrix = (np.eye(self.dims) + (w_k @ v_k.T))
+            self.S_matrix = matrix @ self.S_matrix @ matrix.T
+            print(matrix)
+
+    def get_direction(self, x, function):
+
+        grad_step = -1*self.cache_grad[-1]
+        self.update_S_matrix()
+        self.cache_d = np.matmul(self.S_matrix, grad_step)
+        return self.cache_d
+        
+
         
