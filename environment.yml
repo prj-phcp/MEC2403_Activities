@@ -189,3 +189,5 @@ dependencies:
   - zeromq=4.3.4=h9c3ff4c_1
   - zipp=3.15.0=pyhd8ed1ab_0
   - zstd=1.5.2=h3eb15da_6
+  - pip:
+      - numdifftools==0.9.41

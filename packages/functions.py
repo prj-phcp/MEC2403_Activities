@@ -1,4 +1,5 @@
 import numpy as np
+import numdifftools as nd
 import copy
 
 class SpecialFunction:
@@ -62,42 +63,24 @@ class AnalyticalSpecialFunction(SpecialFunction):
         return self.H(*pargs)
     
 
-class NumericalSpecialFunction(SpecialFunction):
+class NumericalSpecialFunction(AnalyticalSpecialFunction):
 
     def __init__(self, f, epsilon=1e-8):
 
-        self.f = f
-        self.epsilon = epsilon
-
-        super().__init__()
-
-    def __call__(self, *pargs):
-
-        return self.f(*pargs)
-    
+        def f_vec(pargs):
+            return f(*pargs)
+        H = nd.Hessian(f_vec)
+        gradf = nd.Gradient(f_vec)
+        super().__init__(f, gradf, H)
 
     def grad(self, *pargs):
-        
-        n_comp = len(pargs)
-        gf = np.zeros((n_comp,))
-        for i in range(len(pargs)):
-            upper = copy.deepcopy(pargs)
-            upper[i] += self.epsilon
-            lower = copy.deepcopy(pargs)
-            lower[i] -= self.epsilon
-            gf[i] = (self.f(*upper) - self.f(*lower))/(2*self.epsilon)
-        
-        return gf
+
+        return self.gradf(pargs)
     
     def Hessian(self, *pargs):
-        
-        n_comp = len(pargs)
-        hess = np.zeros((n_comp, n_comp))
-        for i in range(n_comp):
-            upper = copy.deepcopy(pargs)
-            upper[i] += self.epsilon
-            lower = copy.deepcopy(pargs)
-            lower[i] -= self.epsilon
-            hess[:, i] = (self.grad(*upper) - self.grad(*lower))/(2*self.epsilon)
-        
-        return hess
+
+        return self.H(pargs)
+
+    
+
+    
