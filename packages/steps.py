@@ -2,7 +2,7 @@ import numpy as np
 
 class ConstantStep:
     
-    def __init__(self, da, epsilon=1e-8, check_direction=True):
+    def __init__(self, da, epsilon=1e-8, check_direction=True, normalize=False):
 
         self.da = da
         self.epsilon = epsilon
@@ -12,6 +12,7 @@ class ConstantStep:
         self.fL = None
         self.fU = None
         self.multiplier = 1.0
+        self.normalize = normalize
         self.reset_step()
 
     def reset_step(self):
@@ -39,6 +40,8 @@ class ConstantStep:
         self.reset_step()
         if self.calculate_deriv(p_initial, direction, function, 0) > 0 and self.check_dir:
             self.multiplier = -1.0
+        if self.normalize:
+            self.multiplier = self.multiplier/np.linalg.norm(direction)
         self.calculate_bounds(p_initial, direction, function)
         while self.fL > self.fU:
             self.aL = self.aU
@@ -51,7 +54,7 @@ class ConstantStep:
 
 class BissectionStep(ConstantStep):
 
-    def __init__(self, da, tol, epsilon=1e-8, check_direction=True):
+    def __init__(self, da, tol, epsilon=1e-8, check_direction=True, normalize=False):
 
         if tol <= epsilon:
             self.tol = epsilon
@@ -81,7 +84,7 @@ class BissectionStep(ConstantStep):
     
 class GoldenSectionStep(ConstantStep):
 
-    def __init__(self, da, tol, epsilon=1e-8, check_direction=True):
+    def __init__(self, da, tol, epsilon=1e-8, check_direction=True, normalize=False):
 
         self.tol = tol
         self.ratio = 0.5*(np.sqrt(5) - 1.0)
