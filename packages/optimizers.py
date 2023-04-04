@@ -108,7 +108,7 @@ class FletcherReevesOptimizer(SteepestDescentOptimizer):
             self.cache_d = grad_step
         else:
             beta = (np.linalg.norm(self.cache_grad[-1])/np.linalg.norm(self.cache_grad[-2])) ** 2
-            self.cache_d = - grad_step + beta * self.cache_d
+            self.cache_d = grad_step + beta * self.cache_d
         return self.cache_d
 
 
