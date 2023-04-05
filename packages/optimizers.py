@@ -152,7 +152,8 @@ class BFGSOptimizer(GenericOptimizer):
             gamma_k = 1.0/np.dot(delta_g, delta_x)
             dxdg = delta_x.reshape(-1,1) @ delta_g.reshape(1,-1)
             dxdx = delta_x.reshape(-1,1) @ delta_x.reshape(1,-1)
-            self.S_matrix = (np.eye(self.dims) - gamma_k * dxdg) @ self.S_matrix @ (np.eye(self.dims) - gamma_k * dxdg.T) + gamma_k * dxdx
+            upd_matrix = (np.eye(self.dims) - gamma_k * dxdg)
+            self.S_matrix = upd_matrix @ self.S_matrix @ upd_matrix.T + gamma_k * dxdx
 
             
 
