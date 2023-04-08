@@ -155,8 +155,6 @@ class BFGSOptimizer(GenericOptimizer):
             upd_matrix = (np.eye(self.dims) - gamma_k * dxdg)
             self.S_matrix = upd_matrix @ self.S_matrix @ upd_matrix.T + gamma_k * dxdx
 
-            
-
     def get_direction(self, x, function):
 
         grad_dir = -1*self.cache_grad[-1]
