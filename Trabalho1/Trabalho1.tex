@@ -100,13 +100,27 @@ Nesta seção são listados alguns links e referências úteis para se entender 
 \begin{enumerate}
   \item \href{https://web.tecgraf.puc-rio.br/~ivan/MEC2403/ProgMatematica_VazPereiraMenezes-Ago2012.pdf}{Apostila de programação matemática da disciplina}
   \item \href{https://github.com/prj-phcp/MEC2403_Activities}{GitHub usado para essa disciplina}
-  \item \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/Lista1/Lista1.ipynb}{Notebook com o código para as figuras desse relatório}
+  \item \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/Trabalho1/Trabalho1.ipynb}{Notebook com o código para as figuras desse relatório}
   \item \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/packages}{Pasta com os códigos a serem aproveitados em todas as listas}
 \end{enumerate}
 
 \section{Questão 01}\label{sec:q01}
 
 \subsection{Enunciado}
+
+Implementar, usando o MATLAB ou Python, os métodos de otimização: (a) \textit{Univariante}; (b) \textit{Powell}; (c) \textit{Steepest Descent}; 
+(d) \textit{Fletcher–Reeves}; (e) \textit{BFGS}; e (f) \textit{Newton–Raphson}. Adotar o método da Seção Áurea para a realização das buscas unidirecionais
+(line search). Para verificação da convergência numérica, utilizar uma tolerância de $10^{-5}$. Em seguida, testar a sua implementação encontrando os pontos
+de mínimo das seguintes funções:
+
+\begin{enumerate}[(a)]
+  \item $f(x_1, x_2) = x_1^2 - 3x_1x_2 + 4x_2^2 + x_1 - x_2$ \\
+        Pontos iniciais: $\mathbf{x^0} = [2, 2]^T$ e $\mathbf{x^0} = [-1, -3]^T$, \label{func:a}
+  \item $f(x_1, x_2) = (1 + a - bx_1 - bx_2)^2 + (b + x_1 + ax_2 - bx_1x_2)^2, \ a = 10, \ b = 1$ \\
+        Pontos iniciais: $\mathbf{x^0} = [10, 2]^T$ e $\mathbf{x^0} = [-2, -3]^T$, \label{func:b}
+\end{enumerate}
+
+\subsection{Solução}
 
 \begin{figure}[htpb]
   \centering
@@ -115,11 +129,99 @@ Nesta seção são listados alguns links e referências úteis para se entender 
   \label{fig:q1_1}
 \end{figure}
 
-\lipsum[1-2]
+\begin{figure}[htpb]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/q1a_Univariant.pdf}
+      \caption{Univariante}
+      \label{fig:q1a_univariant}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1a_Powell.pdf}
+    \caption{Powell}
+    \label{fig:q1a_powell}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1a_Steepest.pdf}
+    \caption{Steepest Descent}
+    \label{fig:q1a_steepest}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1a_FletchRvs.pdf}
+    \caption{Fletcher-Reeves}
+    \label{fig:q1a_fletchrvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1a_NewtnRaph.pdf}
+    \caption{Newton-Raphson}
+    \label{fig:q1a_newtnraph}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1a_BFGS.pdf}
+    \caption{BFGS}
+    \label{fig:q1a_bfgs}
+  \end{subfigure}
+     \caption{Resultados gráficos para a função \ref{func:a}}
+     \label{fig:q1a}
+\end{figure}
 
-\subsection{Solução}
-
-\lipsum[1-2]
+\begin{figure}[htpb]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/q1b_Univariant.pdf}
+      \caption{Univariante}
+      \label{fig:q1b_univariant}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1b_Powell.pdf}
+    \caption{Powell}
+    \label{fig:q1b_powell}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1b_Steepest.pdf}
+    \caption{Steepest Descent}
+    \label{fig:q1b_steepest}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1b_FletchRvs.pdf}
+    \caption{Fletcher-Reeves}
+    \label{fig:q1b_fletchrvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1b_NewtnRaph.pdf}
+    \caption{Newton-Raphson}
+    \label{fig:q1b_newtnraph}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1b_BFGS.pdf}
+    \caption{BFGS}
+    \label{fig:q1b_bfgs}
+  \end{subfigure}
+     \caption{Resultados gráficos para a função \ref{func:b}}
+     \label{fig:q1b}
+\end{figure}
 
 \section{Questão 02}
 
