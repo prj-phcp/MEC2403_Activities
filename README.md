@@ -71,7 +71,12 @@ conda env export | grep -v "^prefix: " > environment.yml
 
 ## Atividades
 
-As atividades presentes neste repositório são:
+### Listas
 
 - <a href="./Lista0">Lista 00</a>: Exercícios iniciais de programação matemática e quebra de gelo com o Python
 - <a href="./Lista1">Lista 01</a>: Implementação inicial dos métodos de busca linear
+- <a href="./Lista2">Lista 02</a>: Implementação e teste dos métodos de otimização
+
+### Trabalhos
+
+- <a href="./Trabalho1">Trabalho 01</a>: Aplicação dos métodos de otimização sem restrições
