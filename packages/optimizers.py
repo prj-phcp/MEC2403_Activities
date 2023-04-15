@@ -18,6 +18,7 @@ class GenericOptimizer:
 
         self.cache_x = []
         self.cache_grad = []
+        self.cache_a = []
         self.cache_d = None
 
     def start_otim(self, x=None):
@@ -37,15 +38,20 @@ class GenericOptimizer:
         self.clear_cache()
         self.start_otim(p_initial)
         x = p_initial
+        a = 0
         while self.iter < self.max_iter:
             self.cache_x.append(x)
+            self.cache_a.append(a)
             self.cache_grad.append(function.grad(*x))
             if np.linalg.norm(self.cache_grad[-1]) <= self.tol:
                 return x
             direction = self.get_direction(x, function)
             self.cache_d = direction
-            _, x = step(x, direction, function)
+            a, x = step(x, direction, function)
             self.iter += 1
+        self.cache_x.append(x)
+        self.cache_a.append(a)
+        self.cache_grad.append(function.grad(*x))
         return x
     
 class UnivariantOptimizer(GenericOptimizer):
@@ -110,12 +116,11 @@ class FletcherReevesOptimizer(GenericOptimizer):
 
 
     def get_direction(self, x, function):
-        grad_step = -1*self.cache_grad[-1]
         if self.iter == 0:
-            self.cache_d = grad_step
+            self.cache_d = -1*self.cache_grad[-1]
         else:
-            beta = (np.linalg.norm(self.cache_grad[-1])/np.linalg.norm(self.cache_grad[-2])) ** 2
-            self.cache_d = grad_step + beta * self.cache_d
+            beta = np.dot(self.cache_grad[-1], self.cache_grad[-1])/np.dot(self.cache_grad[-2], self.cache_grad[-2])
+            self.cache_d = -1*self.cache_grad[-1] + beta * self.cache_d
         return self.cache_d
 
 

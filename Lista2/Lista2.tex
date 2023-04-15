@@ -38,7 +38,7 @@
 
 \begin{document}
 
-\def\TITLE{Trabalho 01}
+\def\TITLE{Lista 02}
 \def\DISCIPLINE{MEC 2403 - Otimização e Algoritmos para Engenhria Mecânica}
 \def\PROFESSOR{Ivan Menezes}
 \def\AUTHOR{Pedro Henrique Cardoso Paulo}
@@ -100,7 +100,7 @@ Nesta seção são listados alguns links e referências úteis para se entender 
 \begin{enumerate}
   \item \href{https://web.tecgraf.puc-rio.br/~ivan/MEC2403/ProgMatematica_VazPereiraMenezes-Ago2012.pdf}{Apostila de programação matemática da disciplina}
   \item \href{https://github.com/prj-phcp/MEC2403_Activities}{GitHub usado para essa disciplina}
-  \item \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/Lista1/Lista1.ipynb}{Notebook com o código para as figuras desse relatório}
+  \item \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/Lista1/Lista2.ipynb}{Notebook com o código para as figuras desse relatório}
   \item \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/packages}{Pasta com os códigos a serem aproveitados em todas as listas}
 \end{enumerate}
 
@@ -121,15 +121,70 @@ Nesta seção são listados alguns links e referências úteis para se entender 
 
 \lipsum[1-2]
 
-\section{Questão 02}
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{l|c|c|c|c|c|}
+    Método             &	Ponto de mínimo	                     & Número de passos	 & $\alpha_1$   & $\alpha_2$	& $\alpha_3$ \\
+    \hline
+    Univariante        & $[ 1.093750,  1.062500,  2.256836]^T$ & 3                 &  0.50000     & -0.93750    & -1.40625      \\
+    Powell             & $[ 2.432024,  1.189955,  4.138784]^T$ & 3                 &  0.50000     & -0.93750    & -0.13596      \\
+    Steepest Descent   & $[ 0.484934,  0.320841,  0.344249]^T$ & 3                 &  0.11647     &  0.70690    &  0.11648      \\
+    Fletcher-Reeves    & $[-0.714286, -0.142857, -0.285714]^T$ & 2                 &  0.11647     &  1.22648    &  --           \\
+    Newton-Raphson     & $[-0.714286, -0.142857, -0.285714]^T$ & 1                 &  1.00000     &  --         &  --           \\
+    BFGS               & $[-0.714286, -0.142857, -0.285714]^T$ & 2                 &  0.11647     &  1.22648    &  --           \\
+    \hline
+  \end{tabular}
+  \caption{Resumo dos resultados obtidos}
+  \label{tab:results_summ}
+\end{table}
 
-\subsection{Enunciado}
 
-\lipsum[1-2]
-
-\subsection{Solução}
-
-\lipsum[1-2]
+\begin{figure}[htpb]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/q1_Univariant.pdf}
+      \caption{Univariante}
+      \label{fig:q1_univariant}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1_Powell.pdf}
+    \caption{Powell}
+    \label{fig:q1_powell}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1_Steepest.pdf}
+    \caption{Steepest Descent}
+    \label{fig:q1_steepest}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1_FletchRvs.pdf}
+    \caption{Fletcher-Reeves}
+    \label{fig:q1_fletchrvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1_NewtnRaph.pdf}
+    \caption{Newton-Raphson}
+    \label{fig:q1_newtnraph}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q1_BFGS.pdf}
+    \caption{BFGS}
+    \label{fig:q1_bfgs}
+  \end{subfigure}
+     \caption{Resumo gráfico dos passos dados em cada método}
+     \label{fig:q1}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

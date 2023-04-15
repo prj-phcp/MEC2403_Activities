@@ -2,7 +2,7 @@ import numpy as np
 
 class ConstantStep:
     
-    def __init__(self, da, epsilon=1e-8, check_direction=True, normalize=False):
+    def __init__(self, da, epsilon=1e-8, check_direction=True, normalize=False, **kwargs):
 
         self.da = da
         self.epsilon = epsilon
@@ -54,20 +54,23 @@ class ConstantStep:
 
 class BissectionStep(ConstantStep):
 
-    def __init__(self, da, tol, epsilon=1e-8, check_direction=True, normalize=False):
+    def __init__(self, da, tol, epsilon=1e-8, check_direction=True, normalize=False, **kwargs):
 
         if tol <= epsilon:
             self.tol = epsilon
         else:
             self.tol = tol
 
-        super().__init__(da=da, epsilon=epsilon, check_direction=check_direction)
+        super().__init__(da=da, epsilon=epsilon, check_direction=check_direction, normalize=normalize, **kwargs)
         
 
     def __call__(self, p_initial, direction, function):
 
         # Passo constante herdado da classe mae
         _, _ = super().__call__(p_initial, direction, function)
+
+        self.aL -= self.da
+        self.calculate_bounds(p_initial, direction, function)
 
         while self.aU - self.aL >= self.tol:
             aM = 0.5 * (self.aU + self.aL)
@@ -78,18 +81,23 @@ class BissectionStep(ConstantStep):
                 self.aL = aM
 
         ak = 0.5 * (self.aU + self.aL)
+        deriv = self.calculate_deriv(p_initial, direction, function, ak)
+        if deriv > 0:
+            ak = self.aL
+        elif deriv < 0:
+            ak = self.aU
         pend = p_initial + self.multiplier*ak*direction
 
         return self.multiplier*ak, pend
     
 class GoldenSectionStep(ConstantStep):
 
-    def __init__(self, da, tol, epsilon=1e-8, check_direction=True, normalize=False):
+    def __init__(self, da, tol, epsilon=1e-8, check_direction=True, normalize=False, **kwargs):
 
         self.tol = tol
         self.ratio = 0.5*(np.sqrt(5) - 1.0)
 
-        super().__init__(da=da, epsilon=epsilon, check_direction=check_direction)
+        super().__init__(da=da, epsilon=epsilon, check_direction=check_direction, normalize=normalize, **kwargs)
 
         self.aE = None
         self.aD = None
@@ -113,6 +121,9 @@ class GoldenSectionStep(ConstantStep):
         # Passo constante herdado da classe mae
         _, _ = super().__call__(p_initial, direction, function)
 
+        self.aL -= self.da
+        self.calculate_bounds(p_initial, direction, function)
+
         # Iniciando as razoes aureas
         self.beta = self.aU - self.aL
         self.calculate_D(p_initial, direction, function)
@@ -122,18 +133,25 @@ class GoldenSectionStep(ConstantStep):
             diff = self.fD - self.fE
             if diff >= 0:
                 self.aU = self.aD
+                self.fU = self.fD
                 self.beta = self.aU - self.aL
                 self.aD = self.aE
                 self.fD = self.fE
                 self.calculate_E(p_initial, direction, function)
             else:
                 self.aL = self.aE
+                self.fL = self.fE
                 self.beta = self.aU - self.aL
                 self.aE = self.aD
                 self.fE = self.fD
                 self.calculate_D(p_initial, direction, function)
 
         ak = 0.5 * (self.aU + self.aL)
+        deriv = self.calculate_deriv(p_initial, direction, function, ak)
+        if deriv > 0:
+            ak = self.aL
+        elif deriv < 0:
+            ak = self.aU
         pend = p_initial + self.multiplier*ak*direction
 
         return self.multiplier*ak, pend
