@@ -55,6 +55,10 @@ git config user.email "<SEU_EMAIL>"
 
 - NOTA: A finalidade desse repositório é ser usado para controle de versão de códigos usados em atividades de aula. Por favor, pense bem antes de comitar e, na dúvida, entre em contato antes
 
+### Comandos úteis
+
+`git clean -fdx`
+
 ### Criando um ambiente
 
 Ter as versões corretas de pacotes é fundamental para garantir a repetibilidade dos exercícios. De modo a permitir isso, um arquivo .yml, contendo as informações dos pacotes utilizados nesses notebooks é encontrado na raiz desse repositório. Para instalá-lo, basta ter o Anaconda ou Miniconda instalado na máquina e rodar a seguinte linha de comando:
