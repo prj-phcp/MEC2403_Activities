@@ -155,5 +155,22 @@ class GoldenSectionStep(ConstantStep):
         pend = p_initial + self.multiplier*ak*direction
 
         return self.multiplier*ak, pend
+    
 
+class AnalyticalStep:
+
+    def __call__(self, p_initial, direction, function):
+        
+        #print(p_initial.shape)
+
+        grad = function.grad(*p_initial).reshape(-1,1)
+        direction = direction.reshape(-1,1)
+        Q = function.Hessian(*p_initial)
+
+        ak = np.dot(grad.T, direction) / (direction.T @ Q @ direction)
+        ak = ak.reshape(-1)
+
+        pend = pend = p_initial - ak*direction.reshape(-1)
+
+        return ak, pend
 
