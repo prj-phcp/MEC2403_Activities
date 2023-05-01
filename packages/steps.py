@@ -1,6 +1,15 @@
 import numpy as np
 
-class ConstantStep:
+class GenericStep:
+
+    def __init__(self):
+
+        pass
+
+    def __call__(self, p_initial, direction, function):
+
+        return 0, p_initial
+class ConstantStep(GenericStep):
     
     def __init__(self, da, epsilon=1e-8, check_direction=True, normalize=False, **kwargs):
 
@@ -14,6 +23,7 @@ class ConstantStep:
         self.multiplier = 1.0
         self.normalize = normalize
         self.reset_step()
+        super().__init__()
 
     def reset_step(self):
 
@@ -157,20 +167,23 @@ class GoldenSectionStep(ConstantStep):
         return self.multiplier*ak, pend
     
 
-class AnalyticalStep:
+class AnalyticalStep(GenericStep):
+
+    def __init__(self):
+
+        super().__init__()
 
     def __call__(self, p_initial, direction, function):
         
-        #print(p_initial.shape)
 
         grad = function.grad(*p_initial).reshape(-1,1)
         direction = direction.reshape(-1,1)
         Q = function.Hessian(*p_initial)
 
-        ak = np.dot(grad.T, direction) / (direction.T @ Q @ direction)
-        ak = ak.reshape(-1)
+        ak = - np.dot(grad.T, direction) / (direction.T @ Q @ direction)
+        ak =  ak.reshape(-1)[0]
 
-        pend = pend = p_initial - ak*direction.reshape(-1)
+        pend = pend = p_initial + ak*direction.reshape(-1)
 
         return ak, pend
 
