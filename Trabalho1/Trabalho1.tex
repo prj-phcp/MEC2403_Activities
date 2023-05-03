@@ -129,6 +129,8 @@ de mínimo das seguintes funções:
   \label{fig:q1_1}
 \end{figure}
 
+\subsubsection{Item \ref{func:a}}
+
 \begin{figure}[htpb]
   \centering
   \begin{subfigure}[b]{0.32\textwidth}
@@ -175,6 +177,8 @@ de mínimo das seguintes funções:
      \caption{Resultados gráficos para a função \ref{func:a}}
      \label{fig:q1a}
 \end{figure}
+
+\subsubsection{Item \ref{func:b}}
 
 \begin{figure}[htpb]
   \centering
@@ -231,7 +235,103 @@ de mínimo das seguintes funções:
 
 \subsection{Solução}
 
-\lipsum[1-2]
+\subsubsection{Determinação do mínimo}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/q2a_Univariant.pdf}
+      \caption{Univariante}
+      \label{fig:q2a_univariant}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2a_Powell.pdf}
+    \caption{Powell}
+    \label{fig:q2a_powell}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2a_Steepest.pdf}
+    \caption{Steepest Descent}
+    \label{fig:q2a_steepest}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2a_FletchRvs.pdf}
+    \caption{Fletcher-Reeves}
+    \label{fig:q2a_fletchrvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2a_NewtnRaph.pdf}
+    \caption{Newton-Raphson}
+    \label{fig:q2a_newtnraph}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2a_BFGS.pdf}
+    \caption{BFGS}
+    \label{fig:q2a_bfgs}
+  \end{subfigure}
+     \caption{Resultados gráficos da determinação do mínimo da função potencial}
+     \label{fig:q2a}
+\end{figure}
+
+\subsubsection{Análise de convergência}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/q2b_Univariant.pdf}
+      \caption{Univariante}
+      \label{fig:q2b_univariant}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2b_Powell.pdf}
+    \caption{Powell}
+    \label{fig:q2b_powell}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2b_Steepest.pdf}
+    \caption{Steepest Descent}
+    \label{fig:q2b_steepest}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2b_FletchRvs.pdf}
+    \caption{Fletcher-Reeves}
+    \label{fig:q2b_fletchrvs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2b_NewtnRaph.pdf}
+    \caption{Newton-Raphson}
+    \label{fig:q2b_newtnraph}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/q2b_BFGS.pdf}
+    \caption{BFGS}
+    \label{fig:q2b_bfgs}
+  \end{subfigure}
+     \caption{Resultados da análise de convergência para discretizações maiores da mola}
+     \label{fig:q2b}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
