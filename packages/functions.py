@@ -64,7 +64,7 @@ class AnalyticalSpecialFunction(SpecialFunction):
 
 class NumericalSpecialFunction(AnalyticalSpecialFunction):
 
-    def __init__(self, f, epsilon=1e-8):
+    def __init__(self, f):
 
         def f_vec(pargs):
             return f(*pargs)
