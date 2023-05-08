@@ -43,7 +43,7 @@
 \def\PROFESSOR{Ivan Menezes}
 \def\AUTHOR{Pedro Henrique Cardoso Paulo}
 \def\CONTACT{pedrorjpaulo.phcp@gmail.com}
-\def\DATE{abril de 2023}
+\def\DATE{maio de 2023}
 
 \title{\textbf{\TITLE} \\ \DISCIPLINE}
 \author{\AUTHOR}
@@ -88,9 +88,9 @@
 Esse é o entregável da \TITLE \ da disciplina \DISCIPLINE. Esse trabalho tem como objetivos:
 
 \begin{enumerate}
-  \item Implementar os principais métodos para cálculo de ponto de mínimo em funções de uma variável
-  \item Aplicar esses métodos em funções 2D ao longo de uma dada direção
-  \item Exercitar a linguagem de programação e as ferramentas de visualização gráfica
+  \item Aplicar os principais métodos de otimização sem restrição (OSR) implementados na \href{https://github.com/prj-phcp/MEC2403_Activities/blob/master/Lista2/Lista2.pdf}{Lista 02}
+  \item Comparar os valores obtidos e número de passos para funções quadráticas e não quadráticas com o previsto pela literatura para cada método
+  \item Aplicar os otimizadores em problemas complexos e testar sua escalabilidade
 \end{enumerate}
 
 \subsection{Links úteis}\label{links}
@@ -232,7 +232,17 @@ de mínimo das seguintes funções:
 
 \subsection{Enunciado}
 
-\lipsum[1-2]
+Utilizando os métodos de otimização implementados na primeira questão:
+
+\begin{enumerate}[(a)]
+  \item Determinar os deslocamentos $(u_A, v_A)$, do ponto $A$, que minimizam a Energia Potencial Total $\Pi$ do sistema de molas indicado na figura abaixo. \
+  Adotar o ponto inicial: $x_0 = [0.01, -0.10]^T$.
+  \item desenvolver um estudo de convergência da solução deste problema (i.e., deslocamento do ponto $A$) para níveis crescentes de discretização \
+  do modelo (ou seja, considerando o número de molas $n = 2, 4, 6, ...$ ). Se possível, comparar as suas respostas com as soluções obtidas usando o Método \
+  dos Elementos Finitos (levando em consideração o comportamento não linear geométrico da estrutura). A rigidez de cada mola ($k_i = 1, ..., n$) é obtida como a \
+  razão entre o módulo de rigidez axial do material e o seu comprimento. Os valores $W_j$ (com $j = 1, ..., n$) correspondem às cargas nodais equivalentes aos pesos \
+  das molas.
+\end{enumerate}
 
 \subsection{Solução}
 
