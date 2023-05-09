@@ -132,6 +132,30 @@ de mínimo das seguintes funções:
 
 \subsubsection{Item \ref{func:a}}
 
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{|l|c|c|c|c|c|}
+    \cline{2-5}
+    \multicolumn{1}{c}{} \vline
+    & 
+    \multicolumn{2}{c}{$\mathbf{x^0} = [2, 2]^T$} \vline
+    & 
+    \multicolumn{2}{c}{$\mathbf{x^0} = [-1, -3]^T$} \vline \\
+    \hline%\cline{2-5}
+    Método             &	Ponto de mínimo	          & Passos	&  Ponto de mínimo	          &  Passos   \\
+    \hline
+    Univariante        & $[-0.714275, -0.142853]^T$ & 46      &  $[-0.714293, -0.142860]^T$ &  48       \\
+    Powell             & $[-0.714286, -0.142857]^T$ & 6       &  $[-0.714286, -0.142857]^T$ &  6        \\
+    Steepest Descent   & $[-0.714280, -0.142855]^T$ & 32      &  $[-0.714294, -0.142861]^T$ &  7        \\
+    Fletcher-Reeves    & $[-0.714286, -0.142857]^T$ & 2       &  $[-0.714286, -0.142858]^T$ &  2        \\
+    Newton-Raphson     & $[-0.714286, -0.142857]^T$ & 1       &  $[-0.714286, -0.142857]^T$ &  1        \\
+    BFGS               & $[-0.714286, -0.142857]^T$ & 2       &  $[-0.714286, -0.142857]^T$ &  2        \\
+    \hline
+  \end{tabular}
+  \caption{Resumo dos resultados obtidos para a função (\ref{func:a})}
+  \label{tab:q1a_results}
+\end{table}
+
 \begin{figure}[htpb]
   \centering
   \begin{subfigure}[b]{0.32\textwidth}
