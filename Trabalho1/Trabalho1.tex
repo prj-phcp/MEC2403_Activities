@@ -205,6 +205,30 @@ de mínimo das seguintes funções:
 
 \subsubsection{Item \ref{func:b}}
 
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{|l|c|c|c|c|c|}
+    \cline{2-5}
+    \multicolumn{1}{c}{} \vline
+    & 
+    \multicolumn{2}{c}{$\mathbf{x^0} = [10, 2]^T$} \vline
+    & 
+    \multicolumn{2}{c}{$\mathbf{x^0} = [-2, -3]^T$} \vline \\
+    \hline%\cline{2-5}
+    Método             &	Ponto de mínimo	          & Passos	&  Ponto de mínimo	          &  Passos   \\
+    \hline
+    Univariante        & $[13.000001, 3.999999]^T$ & 65      &  $[7.000001, -2.000001]^T$ &  61       \\
+    Powell             & $[13.000001, 4.000000]^T$ & 15      &  $[7.000000, -2.000000]^T$ &  18       \\
+    Steepest Descent   & $[13.000002, 3.999999]^T$ & 47      &  $[7.000002, -2.000002]^T$ &  42       \\
+    Fletcher-Reeves    & $[13.000001, 3.999999]^T$ & 64      &  $[7.000000, -2.000000]^T$ &  21       \\
+    Newton-Raphson     & $[10.000000, 1.000000]^T$ & 1       &  $[7.000000, -2.000000]^T$ &  6        \\
+    BFGS               & $[13.000000, 4.000000]^T$ & 9       &  $[7.000000, -2.000000]^T$ &  8        \\
+    \hline
+  \end{tabular}
+  \caption{Resumo dos resultados obtidos para a função (\ref{func:b})}
+  \label{tab:q1b_results}
+\end{table}
+
 \begin{figure}[htpb]
   \centering
   \begin{subfigure}[b]{0.32\textwidth}
@@ -271,6 +295,28 @@ Utilizando os métodos de otimização implementados na primeira questão:
 \subsection{Solução}
 
 \subsubsection{Determinação do mínimo}
+
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{|l|c|c|}
+    \cline{2-3}
+    \multicolumn{1}{c}{} \vline
+    & 
+    \multicolumn{2}{c}{$\mathbf{x^0} = [0.01, -0.10]^T$} \vline \\
+    \hline%\cline{2-5}
+    Método             &	Ponto de mínimo	          & Passos	\\
+    \hline
+    Univariante        & $[-0.205109, 7.788993]^T$ & 69      \\
+    Powell             & $[-0.205109, 7.788993]^T$ & 28      \\
+    Steepest Descent   & $[-0.205109, 7.788993]^T$ & 8       \\
+    Fletcher-Reeves    & $[-0.205109, 7.788993]^T$ & 70      \\
+    Newton-Raphson     & $[-0.205109, 7.788993]^T$ & 200     \\
+    BFGS               & $[-0.205109, 7.788993]^T$ & 200     \\
+    \hline
+  \end{tabular}
+  \caption{Resumo dos resultados obtidos para a discretização em 2 molas}
+  \label{tab:q2a_results}
+\end{table}
 
 \begin{figure}[htpb]
   \centering
