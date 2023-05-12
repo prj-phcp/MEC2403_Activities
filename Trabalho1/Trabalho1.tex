@@ -134,22 +134,35 @@ de mínimo das seguintes funções:
 
 \begin{table}[htpb]
   \centering
-  \begin{tabular}{|l|c|c|c|c|c|}
-    \cline{2-5}
-    \multicolumn{1}{c}{} \vline
+  \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    %\cline{2-7}
+    \multicolumn{1}{c}{} %\vline
     & 
-    \multicolumn{2}{c}{$\mathbf{x^0} = [2, 2]^T$} \vline
+    \multicolumn{3}{c}{$\mathbf{x^0} = [2, 2]^T$} \vline
     & 
-    \multicolumn{2}{c}{$\mathbf{x^0} = [-1, -3]^T$} \vline \\
+    \multicolumn{3}{c}{$\mathbf{x^0} = [-1, -3]^T$} \\%\vline \\
     \hline%\cline{2-5}
-    Método             &	Ponto de mínimo	          & Passos	&  Ponto de mínimo	          &  Passos   \\
-    \hline
-    Univariante        & $[-0.714275, -0.142853]^T$ & 46      &  $[-0.714293, -0.142860]^T$ &  48       \\
-    Powell             & $[-0.714286, -0.142857]^T$ & 6       &  $[-0.714286, -0.142857]^T$ &  6        \\
-    Steepest Descent   & $[-0.714280, -0.142855]^T$ & 32      &  $[-0.714294, -0.142861]^T$ &  7        \\
-    Fletcher-Reeves    & $[-0.714286, -0.142857]^T$ & 2       &  $[-0.714286, -0.142858]^T$ &  2        \\
-    Newton-Raphson     & $[-0.714286, -0.142857]^T$ & 1       &  $[-0.714286, -0.142857]^T$ &  1        \\
-    BFGS               & $[-0.714286, -0.142857]^T$ & 2       &  $[-0.714286, -0.142857]^T$ &  2        \\
+    \textbf{Método}
+    &
+    \textbf{Ponto de mínimo}
+    & 
+    $\mathbf{n}_{passos}$
+    & 
+    \textbf{t (s)}
+    &
+    \textbf{Ponto de mínimo}
+    & 
+    $\mathbf{n}_{passos}$
+    & 
+    \textbf{t (s)}
+    \\
+    %\hline
+    Univariante        & $[-0.714275, -0.142853]^T$ & 46  & 0.011 &  $[-0.714293, -0.142860]^T$ &  48 &  0.015      \\
+    Powell             & $[-0.714286, -0.142857]^T$ & 6   & 0.028 &  $[-0.714286, -0.142857]^T$ &  6  &  0.007      \\
+    Steepest Descent   & $[-0.714280, -0.142855]^T$ & 32  & 0.016 &  $[-0.714294, -0.142861]^T$ &  7  &  0.004      \\
+    Fletcher-Reeves    & $[-0.714286, -0.142857]^T$ & 2   & 0.001 &  $[-0.714286, -0.142858]^T$ &  2  &  0.001      \\
+    Newton-Raphson     & $[-0.714286, -0.142857]^T$ & 1   & 0.001 &  $[-0.714286, -0.142857]^T$ &  1  &  0.001      \\
+    BFGS               & $[-0.714286, -0.142857]^T$ & 2   & 0.001 &  $[-0.714286, -0.142857]^T$ &  2  &  0.001      \\
     \hline
   \end{tabular}
   \caption{Resumo dos resultados obtidos para a função (\ref{func:a})}
@@ -207,22 +220,34 @@ de mínimo das seguintes funções:
 
 \begin{table}[htpb]
   \centering
-  \begin{tabular}{|l|c|c|c|c|c|}
-    \cline{2-5}
-    \multicolumn{1}{c}{} \vline
+  \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    %\cline{2-7}
+    \multicolumn{1}{c}{} %\vline
     & 
-    \multicolumn{2}{c}{$\mathbf{x^0} = [10, 2]^T$} \vline
+    \multicolumn{3}{c}{$\mathbf{x^0} = [10, 2]^T$} \vline
     & 
-    \multicolumn{2}{c}{$\mathbf{x^0} = [-2, -3]^T$} \vline \\
+    \multicolumn{3}{c}{$\mathbf{x^0} = [-2, -3]^T$} \\%\vline \\
     \hline%\cline{2-5}
-    Método             &	Ponto de mínimo	          & Passos	&  Ponto de mínimo	          &  Passos   \\
-    \hline
-    Univariante        & $[13.000001, 3.999999]^T$ & 65      &  $[7.000001, -2.000001]^T$ &  61       \\
-    Powell             & $[13.000001, 4.000000]^T$ & 15      &  $[7.000000, -2.000000]^T$ &  18       \\
-    Steepest Descent   & $[13.000002, 3.999999]^T$ & 47      &  $[7.000002, -2.000002]^T$ &  42       \\
-    Fletcher-Reeves    & $[13.000001, 3.999999]^T$ & 64      &  $[7.000000, -2.000000]^T$ &  21       \\
-    Newton-Raphson     & $[10.000000, 1.000000]^T$ & 1       &  $[7.000000, -2.000000]^T$ &  6        \\
-    BFGS               & $[13.000000, 4.000000]^T$ & 9       &  $[7.000000, -2.000000]^T$ &  8        \\
+    \textbf{Método}
+    &
+    \textbf{Ponto de mínimo}
+    & 
+    $\mathbf{n}_{passos}$
+    & 
+    \textbf{t (s)}
+    &
+    \textbf{Ponto de mínimo}
+    & 
+    $\mathbf{n}_{passos}$
+    & 
+    \textbf{t (s)}
+    \\
+    Univariante        & $[13.000001, 3.999999]^T$ & 65 & 0.019 &  $[7.000001, -2.000001]^T$ &  61  & 0.018    \\
+    Powell             & $[13.000001, 4.000000]^T$ & 15 & 0.011 &  $[7.000000, -2.000000]^T$ &  18  & 0.032    \\
+    Steepest Descent   & $[13.000002, 3.999999]^T$ & 47 & 0.013 &  $[7.000002, -2.000002]^T$ &  42  & 0.009    \\
+    Fletcher-Reeves    & $[13.000001, 3.999999]^T$ & 64 & 0.013 &  $[7.000000, -2.000000]^T$ &  21  & 0.004    \\
+    Newton-Raphson     & $[10.000000, 1.000000]^T$ & 1  & 0.001 &  $[7.000000, -2.000000]^T$ &  6   & 0.005    \\
+    BFGS               & $[13.000000, 4.000000]^T$ & 9  & 0.008 &  $[7.000000, -2.000000]^T$ &  8   & 0.010    \\
     \hline
   \end{tabular}
   \caption{Resumo dos resultados obtidos para a função (\ref{func:b})}
@@ -298,20 +323,26 @@ Utilizando os métodos de otimização implementados na primeira questão:
 
 \begin{table}[htpb]
   \centering
-  \begin{tabular}{|l|c|c|}
-    \cline{2-3}
-    \multicolumn{1}{c}{} \vline
+  \begin{tabular}{|l|c|c|c|}
+    %\cline{2-4}
+    \multicolumn{1}{c}{} %\vline
     & 
-    \multicolumn{2}{c}{$\mathbf{x^0} = [0.01, -0.10]^T$} \vline \\
+    \multicolumn{3}{c}{$\mathbf{x^0} = [0.01, -0.10]^T$} \\%\vline \\
     \hline%\cline{2-5}
-    Método             &	Ponto de mínimo	          & Passos	\\
-    \hline
-    Univariante        & $[-0.205109, 7.788993]^T$ & 69      \\
-    Powell             & $[-0.205109, 7.788993]^T$ & 28      \\
-    Steepest Descent   & $[-0.205109, 7.788993]^T$ & 8       \\
-    Fletcher-Reeves    & $[-0.205109, 7.788993]^T$ & 70      \\
-    Newton-Raphson     & $[-0.205109, 7.788993]^T$ & 200     \\
-    BFGS               & $[-0.205109, 7.788993]^T$ & 200     \\
+    \textbf{Método}
+    &
+    \textbf{Ponto de mínimo}
+    & 
+    $\mathbf{n}_{passos}$
+    & 
+    \textbf{t (s)}
+    \\
+    Univariante        & $[-0.205109, 7.788993]^T$ & 69  &  0.061    \\
+    Powell             & $[-0.205109, 7.788993]^T$ & 28  & 81.429    \\
+    Steepest Descent   & $[-0.205109, 7.788993]^T$ & 8   &  0.007    \\
+    Fletcher-Reeves    & $[-0.205109, 7.788993]^T$ & 70  &  0.049    \\
+    Newton-Raphson     & $[-0.205109, 7.788993]^T$ & 200 &  0.090    \\
+    BFGS               & $[-0.205109, 7.788993]^T$ & 200 &  0.082    \\
     \hline
   \end{tabular}
   \caption{Resumo dos resultados obtidos para a discretização em 2 molas}
