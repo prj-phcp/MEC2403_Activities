@@ -57,7 +57,11 @@ git config user.email "<SEU_EMAIL>"
 
 ### Comandos úteis
 
-`git clean -fdx`
+#### Para limpar os arquivos da pasta no .gitignore
+
+```(bash)
+git clean -fdx
+```
 
 ### Criando um ambiente
 
