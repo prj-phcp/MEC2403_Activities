@@ -34,9 +34,10 @@ class ConstantStep(GenericStep):
         self.multiplier = 1.0
         
     def calculate_deriv(self, p_initial, direction, function, aM):
-
-        f_plus = function(*(p_initial + self.multiplier*(aM + self.epsilon)*direction))
-        f_minus = function(*(p_initial + self.multiplier*(aM - self.epsilon)*direction))
+        
+        norm_d = np.linalg.norm(direction)
+        f_plus = function(*(p_initial + self.multiplier*(aM*norm_d + self.epsilon)*(direction/norm_d)))
+        f_minus = function(*(p_initial + self.multiplier*(aM*norm_d - self.epsilon)*(direction/norm_d)))
         
         return f_plus - f_minus
 
