@@ -1,0 +1,107 @@
+\documentclass[10pt, a4paper]{article}
+% \usepackage[english]{babel}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+\usepackage{lipsum}
+
+% code
+\usepackage{pythonhighlight}
+\renewcommand{\lstlistingname}{Anexo} % Listing->Code
+\usepackage{adjustbox}
+
+% For subfigure use
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=2cm]{geometry}
+
+% tabelas
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\usepackage{float}
+\usepackage{pdfpages} %Insert pdf pages
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{enumerate}
+
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{cleveref}
+%\usepackage[notransparent]{svg}
+\newcommand{\crefrangeconjunction}{--}
+
+
+\begin{document}
+
+\def\TITLE{Lista 03}
+\def\DISCIPLINE{MEC 2403 - Otimização e Algoritmos para Engenharia Mecânica}
+\def\PROFESSOR{Ivan Menezes}
+\def\AUTHOR{Pedro Henrique Cardoso Paulo}
+\def\CONTACT{pedrorjpaulo.phcp@gmail.com}
+\def\DATE{junho de 2023}
+
+\title{\textbf{\TITLE} \\ \DISCIPLINE}
+\author{\AUTHOR}
+\date{\DATE}
+
+\begin{titlepage}
+      \begin{center}
+          \vspace*{1cm}
+
+          \Huge
+          \textbf{\TITLE}
+
+          \vspace{0.5cm}
+          \LARGE
+          \DISCIPLINE
+
+          \vspace{1.5cm}
+
+          \textbf{\AUTHOR \\ {\tt \CONTACT}}
+
+          \vfill
+          Professor: \PROFESSOR
+
+          \vspace{0.8cm}
+
+          \includegraphics[width=0.2\textwidth]{../general/puc.jpg}
+
+          \Large
+          Departamento de Engenharia Mecânica\\
+          PUC-RJ Pontifícia Universidade Católica do Rio de Janeiro\\
+          \DATE
+
+      \end{center}
+  \end{titlepage}
+
+%\maketitle
+
+\includepdf[pages=-]{Lista3_editada.pdf}
+
+\appendix
+
+\appendixname
+
+\section{Gráficos iterativos}
+
+Os gráficos forma gerados usando a calculadora online Desmos. Caso seja do interesse ver e interagir, visitar:
+
+\begin{itemize}
+  \item \textbf{Questão 2}: \href{https://www.desmos.com/calculator/nu2funszid}{Clique aqui}
+  \item \textbf{Questão 3}: \href{https://www.desmos.com/calculator/weifmlruuk}{Clique aqui}
+  \item \textbf{Questão 4}: \href{https://www.desmos.com/calculator/a0nfpi3fnx}{Clique aqui}
+  \item \textbf{Questão 5}: \href{https://www.desmos.com/calculator/q8xrue3lws}{Clique aqui}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{apalike}
+\bibliography{export}
+
+\end{document}
