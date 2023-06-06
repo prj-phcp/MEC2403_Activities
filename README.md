@@ -84,7 +84,9 @@ conda env export | grep -v "^prefix: " > environment.yml
 - <a href="./Lista0">Lista 00</a>: Exercícios iniciais de programação matemática e quebra de gelo com o Python
 - <a href="./Lista1">Lista 01</a>: Implementação inicial dos métodos de busca linear
 - <a href="./Lista2">Lista 02</a>: Implementação e teste dos métodos de otimização
+- <a href="./Lista3">Lista 03</a>: Estudo analítico de métodos de otimização com restrição
 
 ### Trabalhos
 
 - <a href="./Trabalho1">Trabalho 01</a>: Aplicação dos métodos de otimização sem restrições
+- <a href="./Trabalho2">Trabalho 02</a>: Aplicação dos métodos de otimização com restrições

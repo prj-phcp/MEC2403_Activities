@@ -6,6 +6,12 @@ class GenericStep:
 
         pass
 
+    def set_da(self):
+        pass
+    
+    def get_da(self):
+        return 0.0
+
     def __call__(self, p_initial, direction, function):
 
         return 0, p_initial
@@ -24,6 +30,15 @@ class ConstantStep(GenericStep):
         self.normalize = normalize
         self.reset_step()
         super().__init__()
+
+    def get_da(self):
+
+        return self.da
+
+    def set_da(self, da):
+
+        self.da = da
+        self.reset_step()
 
     def reset_step(self):
 
