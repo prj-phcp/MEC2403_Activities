@@ -56,7 +56,7 @@ class PenaltyInequityConstraint(Constraint):
     def Hessian(self, *pargs):
         f = self.func(*pargs)
         gradf = self.func.grad(*pargs).reshape(-1,1)
-        return self.rp * (0.5 * (1.0 + np.sign(f))) * (f * self.func.Hessian(*pargs) + gradf.T @ gradf)
+        return self.rp * (0.5 * (1.0 + np.sign(f))) * (f * self.func.Hessian(*pargs) + gradf @ gradf.T)
     
 
 class BarrierInequityConstraint(Constraint):
@@ -73,7 +73,7 @@ class BarrierInequityConstraint(Constraint):
     def Hessian(self, *pargs):
         f = self.func(*pargs)
         gradf = self.func.grad(*pargs).reshape(-1,1)
-        return self.rp / (f) ** 2 * (self.func.Hessian(*pargs) - 2.0 / f *  gradf.T @ gradf)
+        return self.rp / (f) ** 2 * (self.func.Hessian(*pargs) - 2.0 / f *  gradf @ gradf.T)
     
     def check_validity(self, point):
 

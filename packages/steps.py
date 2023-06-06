@@ -29,6 +29,11 @@ class ConstantStep(GenericStep):
         self.multiplier = 1.0
         self.normalize = normalize
         self.reset_step()
+        self.verbose = False
+        if 'verbose' in kwargs.keys(): self.verbose = kwargs['verbose']
+        self.treshold = None
+        if 'treshold' in kwargs.keys(): self.treshold = kwargs['treshold']
+
         super().__init__()
 
     def get_da(self):
@@ -51,10 +56,12 @@ class ConstantStep(GenericStep):
     def calculate_deriv(self, p_initial, direction, function, aM):
         
         norm_d = np.linalg.norm(direction)
+        if norm_d == 0.0:
+            norm_d = 1.0
         f_plus = function(*(p_initial + self.multiplier*(aM*norm_d + self.epsilon)*(direction/norm_d)))
         f_minus = function(*(p_initial + self.multiplier*(aM*norm_d - self.epsilon)*(direction/norm_d)))
         
-        return f_plus - f_minus
+        return (f_plus - f_minus) / self.epsilon
 
     def calculate_bounds(self, p_initial, direction, function):
 
@@ -70,6 +77,14 @@ class ConstantStep(GenericStep):
             self.multiplier = self.multiplier/np.linalg.norm(direction)
         self.calculate_bounds(p_initial, direction, function)
         while self.fL > self.fU:
+            if not self.treshold is None:
+                if self.fU <= self.treshold:
+                    self.aU = self.aL
+                    self.aL -= self.da
+                    self.calculate_bounds(p_initial, direction, function)
+                    print('Treshold violated!')
+                    break
+            if self.verbose: print(f'Constant step: alpha = {self.aL}, function values between {self.fL} and {self.fU}. Evaluated point in {p_initial + self.multiplier*self.aL*direction}')
             self.aL = self.aU
             self.aU += self.da
             self.calculate_bounds(p_initial, direction, function)
