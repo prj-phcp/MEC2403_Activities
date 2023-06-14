@@ -31,8 +31,12 @@ class ConstantStep(GenericStep):
         self.reset_step()
         self.verbose = False
         if 'verbose' in kwargs.keys(): self.verbose = kwargs['verbose']
-        self.treshold = None
+        self.treshold = - np.inf
         if 'treshold' in kwargs.keys(): self.treshold = kwargs['treshold']
+        if 'validation' in kwargs.keys():
+            self.set_validation(kwargs['validation'])
+        else:
+            self.set_validation()
 
         super().__init__()
 
@@ -44,6 +48,10 @@ class ConstantStep(GenericStep):
 
         self.da = da
         self.reset_step()
+
+    def set_validation(self, validate = lambda point: True):
+
+        self.validation = validate
 
     def reset_step(self):
 
@@ -77,13 +85,13 @@ class ConstantStep(GenericStep):
             self.multiplier = self.multiplier/np.linalg.norm(direction)
         self.calculate_bounds(p_initial, direction, function)
         while self.fL > self.fU:
-            if not self.treshold is None:
-                if self.fU <= self.treshold:
-                    self.aU = self.aL
-                    self.aL -= self.da
-                    self.calculate_bounds(p_initial, direction, function)
-                    print('Treshold violated!')
-                    break
+            pend = p_initial + self.multiplier*self.aL*direction
+            if self.fU <= self.treshold or not self.validation(pend):
+                self.aU = self.aL
+                self.aL -= self.da
+                self.calculate_bounds(p_initial, direction, function)
+                #print('Treshold violated!')
+                break
             if self.verbose: print(f'Constant step: alpha = {self.aL}, function values between {self.fL} and {self.fU}. Evaluated point in {p_initial + self.multiplier*self.aL*direction}')
             self.aL = self.aU
             self.aU += self.da

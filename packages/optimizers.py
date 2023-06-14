@@ -49,12 +49,9 @@ class GenericOptimizer:
             if np.linalg.norm(direction) == 0.0:
                 print('Directional vector returned is zero. Nothing to optimize!')
                 return x
-            if np.linalg.norm(direction) == 0.0:
-                print('Directional vector returned is zero. Nothing to optimize!')
-                return x
             if np.isnan(np.sum(direction)):
-                print('Null direction found. Searching on random direction!')
-                direction = np.random.rand(self.dims)
+                print('Null direction found. Nothing to optimize!')
+                return x
             self.cache_d = direction
             a, x = step(x, direction, function)
             self.iter += 1
